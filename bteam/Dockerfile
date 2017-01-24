@@ -18,11 +18,12 @@ WORKDIR /data
 ENV BTEAM_FILE=BTeam_Server_v1.0.12c.zip \
     BTEAM_CHECKSUM=91a9e73db3800bba7f816979566b93e7
 
-RUN wget -q http://servers.technicpack.net/Technic/servers/bteam/${BTEAM_FILE} 
-#&& \
-#    echo "${BTEAM_CHECKSUM} ${BTEAM_FILE}" | md5sum -c -
+RUN wget -q http://servers.technicpack.net/Technic/servers/bteam/${BTEAM_FILE} && \
+    echo "${BTEAM_CHECKSUM} ${BTEAM_FILE}" | md5sum -c -
+
+COPY runserver.sh /data
 
 EXPOSE 25565
 
-#CMD ["/bteam/runserver.sh"]
+#CMD ["/data/runserver.sh"]
 

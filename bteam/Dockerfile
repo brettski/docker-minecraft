@@ -26,5 +26,5 @@ WORKDIR /bteam
 
 EXPOSE 25565
 
-CMD ["/bteam/launch.sh"]
+CMD ["/bteam/runserver"]
 

@@ -5,26 +5,24 @@ MAINTAINER brettski
 # Install dependencies
 RUN apt-get update && \
     apt-get install -y \
-      apt-utils \
       ca-certificates \
-      curl \
       wget \
       unzip \
-      openjdk-8-jdk && \
+      openjdk-8-jre-headless && \
       rm -rf /var/lib/apt/lists/*
 
-
-# Download and prepare B-Team server
-# TODO: add checksum
-RUN wget -q http://servers.technicpack.net/Technic/servers/bteam/BTeam_Server_v1.0.12c.zip && \
-    # Will do this when running the container
-    #unzip BTeam_Server_v1.0.12c.zip -d /bteam && \
-    #chmod +x /bteam/launch.sh
-
 VOLUME /bteam
-WORKDIR /bteam
+WORKDIR /data
+
+# Download
+ENV BTEAM_FILE=BTeam_Server_v1.0.12c.zip \
+    BTEAM_CHECKSUM=91a9e73db3800bba7f816979566b93e7
+
+RUN wget -q http://servers.technicpack.net/Technic/servers/bteam/${BTEAM_FILE} 
+#&& \
+#    echo "${BTEAM_CHECKSUM} ${BTEAM_FILE}" | md5sum -c -
 
 EXPOSE 25565
 
-CMD ["/bteam/runserver"]
+#CMD ["/bteam/runserver.sh"]
 

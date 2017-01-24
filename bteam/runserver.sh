@@ -3,5 +3,5 @@
 
 if [ -nt -f /bteam/bteam.jar ] 
     then
-        # unzip shit
+        unzip /BTeam_Server-v1.0.12c.zip -d /bteam
 fi
